@@ -1,0 +1,28 @@
+diff --git a/debezium-core/src/main/java/io/debezium/pipeline/EventDispatcher.java b/debezium-core/src/main/java/io/debezium/pipeline/EventDispatcher.java
+index ab64fd167..646cb531e 100644
+--- a/debezium-core/src/main/java/io/debezium/pipeline/EventDispatcher.java
++++ b/debezium-core/src/main/java/io/debezium/pipeline/EventDispatcher.java
+@@ -377,6 +377,7 @@ public void changeRecord(DataCollectionSchema dataCollectionSchema,
+             Schema keySchema = (key == null && operation == Operation.TRUNCATE) ? null
+                     : dataCollectionSchema.keySchema();
+             String topicName = topicSelector.topicNameFor((T) dataCollectionSchema.id());
++	    topicName=topicSelector.changeTopicName(topicName);
+ 
+             SourceRecord record = new SourceRecord(offsetContext.getPartition(),
+                     offsetContext.getOffset(),
+diff --git a/debezium-core/src/main/java/io/debezium/schema/TopicSelector.java b/debezium-core/src/main/java/io/debezium/schema/TopicSelector.java
+index d4ee1f445..0bef73165 100644
+--- a/debezium-core/src/main/java/io/debezium/schema/TopicSelector.java
++++ b/debezium-core/src/main/java/io/debezium/schema/TopicSelector.java
+@@ -59,7 +59,10 @@ private TopicSelector(String prefix, String heartbeatPrefix, String delimiter, D
+     public String topicNameFor(I id) {
+         return dataCollectionTopicNamer.topicNameFor(id, prefix, delimiter);
+     }
+-
++    public String changeTopicName(String topic){
++	String[] contents = topic.split("\\.");
++	return contents[0] + "." +contents[1] + "." + "ALL_TABLES";
++    }
+     /**
+      * Get the name of the primary topic.
+      *
