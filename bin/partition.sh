@@ -13,7 +13,7 @@ handle_partition(){
     partition_information=$1
     for(( j=2;j<${#p_array[@]}-2;j++)) do
         partition_information=$partition_information,${p_array[j]}
-        sed -i 24a\ "sed -i \"/^COPY[[:space:]]$SCHEMA.${p_array[j]}[[:space:]](.*)[[:space:]]FROM[[:space:]]stdin;/ { s/${p_array[j]}/$1/g;}\"  pg.sql" ~/pg2og_migration/export.sh
+        sed -i 22a\ "sed -i \"/^COPY[[:space:]]$SCHEMA.${p_array[j]}[[:space:]](.*)[[:space:]]FROM[[:space:]]stdin;/ { s/${p_array[j]}/$1/g;}\"  pg.sql" ~/pg2og_migration/export.sh
     done;
     echo "$partition_information">>~/pg2og_migration/partition_table_information.txt
 }

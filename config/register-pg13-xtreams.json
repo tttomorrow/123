@@ -1,13 +1,13 @@
 {
-  "name": "fulfillment-connector",  
+  "name": "fulfillment-connector",
   "config": {
-    "connector.class": "io.debezium.connector.postgresql.PostgresConnector", 
-    "database.hostname": "0.0.0.0", 
-    "database.port": "5432", 
-    "database.user": "copyuser", 
-    "database.password": "testdb@1234", 
-    "database.dbname" : "pg_dbname", 
-    "database.server.name": "fulfillment", 
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "database.hostname": "0.0.0.0",
+    "database.port": "5432",
+    "database.user": "copyuser",
+    "database.password": "testdb@1234",
+    "database.dbname" : "pg_dbname",
+    "database.server.name": "fulfillment",
     "plugin.name":"wal2json",
     "slot.name":"slotname",
     "provide.transaction.metadata":"true",
@@ -15,3 +15,4 @@
     "snapshot.custom.class":"io.debezium.connector.postgresql.snapshot.PgDumpSnapshotter"
   }
 }
+
