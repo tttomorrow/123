@@ -22,7 +22,9 @@ DIR=$(cd `dirname $0`;pwd)
 BIN_DIR=$DIR/bin
 CONFIG_DIR=$DIR/config
 PATCH_DIR=$DIR/debezium-patch
-KAFKA_DIR=$DIR/kafka_2.13-2.8.1
+KAFKA_VERSION1=2.13
+KAFKA_VERSION2=2.8.1
+KAFKA_DIR=$DIR/kafka_$KAFKA_VERSION1-$KAFKA_VERSION2
 SNAPSHOT_DIR=$DIR/pgdumpSnapshotter
 DEBEZIUM_DIR=$DIR/debezium
 CONSUMER_DIR=$DIR/openGauss-tools-onlineMigration
@@ -32,10 +34,10 @@ DEBEZIUM_ORACLE_CONNECTOR_DIR=$DIR/debezium-connector-postgres
 install_kafka_debezium_consumer(){
     cd $DIR
 
-    wget -c https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/2.8.1/kafka_2.13-2.8.1.tgz
+    wget -c https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/$KAFKA_VERSION2/kafka_$KAFKA_VERSION1-$KAFKA_VERSION2.tgz
     wget -c https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/1.6.1.Final/debezium-connector-postgres-1.6.1.Final-plugin.tar.gz
 
-    tar -zxf kafka_2.13-2.8.1.tgz
+    tar -zxf kafka_$KAFKA_VERSION1-$KAFKA_VERSION2.tgz
     tar -zxf debezium-connector-postgres-1.6.1.Final-plugin.tar.gz
     
     git clone --branch v1.6.1.Final https://github.com/debezium/debezium.git
