@@ -2,25 +2,29 @@
 SCHEMA="public"
 # host of postgres
 # for example, PG_HOST="0.0.0.0"
-PG_HOST="0.0.0.0"
+PG_HOST=""
 # install user of postgres
 # for example, PG_USER="postgres"
-PG_USER="postgres"
+PG_USER=""
 # Postgres database name to be migrated
 # for example, PG_DBNAME="pg_dbname"
-PG_PORT="5432"
-PG_DBNAME="pg_dbname"
+PG_PORT=""
+PG_DBNAME=""
 
 # database port of openGauss in local host
 # for example, OG_PORT="5432"
-OG_PORT="5432"
-OG_DBNAME="og_dbname"
+# for example, OG_DBNAME="og_dbname"
+OG_PORT=""
+OG_DBNAME=""
+
 
 DIR=$(cd `dirname $0`;pwd)
 BIN_DIR=$DIR/bin
 CONFIG_DIR=$DIR/config
 PATCH_DIR=$DIR/debezium-patch
-KAFKA_DIR=$DIR/kafka_2.13-2.8.0
+KAFKA_VERSION1=2.13
+KAFKA_VERSION2=2.8.1
+KAFKA_DIR=$DIR/kafka_$KAFKA_VERSION1-$KAFKA_VERSION2
 SNAPSHOT_DIR=$DIR/pgdumpSnapshotter
 DEBEZIUM_DIR=$DIR/debezium
 CONSUMER_DIR=$DIR/openGauss-tools-onlineMigration
@@ -30,10 +34,10 @@ DEBEZIUM_ORACLE_CONNECTOR_DIR=$DIR/debezium-connector-postgres
 install_kafka_debezium_consumer(){
     cd $DIR
 
-    wget -c https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/2.8.0/kafka_2.13-2.8.0.tgz
+    wget -c https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/$KAFKA_VERSION2/kafka_$KAFKA_VERSION1-$KAFKA_VERSION2.tgz
     wget -c https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/1.6.1.Final/debezium-connector-postgres-1.6.1.Final-plugin.tar.gz
 
-    tar -zxf kafka_2.13-2.8.0.tgz
+    tar -zxf kafka_$KAFKA_VERSION1-$KAFKA_VERSION2.tgz
     tar -zxf debezium-connector-postgres-1.6.1.Final-plugin.tar.gz
     
     git clone --branch v1.6.1.Final https://github.com/debezium/debezium.git

@@ -37,8 +37,6 @@ public class PgDumpSnapshotter implements Snapshotter {
             try {
                 String cmd1="sh ~/pg2og_migration/export.sh"+" "+newSlotInfo.snapshotName();
                 String cmd2="sh ~/pg2og_migration/import.sh";
-                System.out.println(cmd1);
-                System.out.println(cmd2);
                 Process ps = Runtime.getRuntime().exec(new String[] {"/bin/sh","-c",cmd1});
                 ps.waitFor();
                 ps=Runtime.getRuntime().exec(new String[] {"/bin/sh","-c",cmd2});
