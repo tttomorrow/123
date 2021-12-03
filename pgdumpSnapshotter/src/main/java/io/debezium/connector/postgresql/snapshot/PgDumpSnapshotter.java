@@ -13,7 +13,8 @@ import io.debezium.connector.postgresql.spi.SlotCreationResult;
 import io.debezium.connector.postgresql.spi.SlotState;
 import io.debezium.connector.postgresql.spi.Snapshotter;
 import io.debezium.relational.TableId;
-
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class PgDumpSnapshotter implements Snapshotter {
     private OffsetState sourceInfo;
@@ -33,14 +34,17 @@ public class PgDumpSnapshotter implements Snapshotter {
 
     @Override
     public String snapshotTransactionIsolationLevelStatement(SlotCreationResult newSlotInfo) {
+	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if (newSlotInfo != null) {
             try {
                 String cmd1="sh ~/pg2og_migration/export.sh"+" "+newSlotInfo.snapshotName();
                 String cmd2="sh ~/pg2og_migration/import.sh";
+                System.out.println(df.format(new Date())+"  "+"outline migration start...");
                 Process ps = Runtime.getRuntime().exec(new String[] {"/bin/sh","-c",cmd1});
                 ps.waitFor();
                 ps=Runtime.getRuntime().exec(new String[] {"/bin/sh","-c",cmd2});
                 ps.waitFor();
+                System.out.println(df.format(new Date())+"  "+"outline migration end...");
             } catch (Exception e) {
                 e.printStackTrace();
             }
