@@ -43,12 +43,12 @@ public class PgDumpSnapshotter implements Snapshotter {
             try {
                 String cmd1="sh ~/pg2og_migration/export.sh"+" "+newSlotInfo.snapshotName();
                 String cmd2="sh ~/pg2og_migration/import.sh";
-		System.out.println("*****************"+df.format(new Date())+"  "+"outline migration start"+"*************************");
+		        System.out.println(df.format(new Date())+"  "+"outline migration start...");
                 Process ps = Runtime.getRuntime().exec(new String[] {"/bin/sh","-c",cmd1});
                 ps.waitFor();
                 ps=Runtime.getRuntime().exec(new String[] {"/bin/sh","-c",cmd2});
                 ps.waitFor();
-		System.out.println("*****************"+df.format(new Date())+"  "+"outline migration end"+"*************************");
+		        System.out.println(df.format(new Date())+"  "+"outline migration end.");
             } catch (Exception e) {
                 e.printStackTrace();
             }
