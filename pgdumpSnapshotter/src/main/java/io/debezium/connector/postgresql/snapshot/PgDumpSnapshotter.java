@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) @ mry. 2021-2031. All rights reserved.
+ */
 package io.debezium.connector.postgresql.snapshot;
 
 import java.time.Duration;
