@@ -78,7 +78,14 @@ compile_consumer(){
     mvn install
     mvn package
 }
-
+handle_clean(){
+    cd $DIR
+    echo "handle $DIR/clean.sh"
+    sed -i "s/^PG_HOST=.*/PG_HOST=${PG_HOST}/" ./clean.sh
+    sed -i "s/^PG_USER=.*/PG_USER=${PG_USER}/" ./clean.sh
+    sed -i "s!^PG_DATA_DIR=.*!PG_DATA_DIR=${PG_DATA_DIR}!" ./clean.sh
+    sed -i "s!^OG_DATA_DIR=.*!OG_DATA_DIR=${OG_DATA_DIR}!" ./clean.sh
+}
 # configure export.sh
 handle_export(){
     cd $BIN_DIR
@@ -202,6 +209,8 @@ handle_export
 get_partition
 
 handle_import
+
+handle_clean
 
 start_debezium
 
