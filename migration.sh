@@ -1,21 +1,37 @@
+# Postgres database schema to be migrated
 # default:public
 SCHEMA="public"
+
 # host of postgres
 # for example, PG_HOST="0.0.0.0"
 PG_HOST=""
+
 # install user of postgres
 # for example, PG_USER="postgres"
 PG_USER=""
+
+# database port of postgres database
+# for example, PG_PORT="5432"
+PG_PORT=""
+
 # Postgres database name to be migrated
 # for example, PG_DBNAME="pg_dbname"
-PG_PORT=""
 PG_DBNAME=""
+
+# The directory where intermediate data is stored on the postgres side
+# for example, PG_DATA_DIR="/data/pg2og"
 PG_DATA_DIR=""
+
 # database port of openGauss in local host
 # for example, OG_PORT="5432"
-# for example, OG_DBNAME="og_dbname"
 OG_PORT=""
+
+# opengauss database name for receiving data from postgres
+# for example, OG_DBNAME="og_dbname"
 OG_DBNAME=""
+
+# The directory where intermediate data is stored on the opengauss side
+# for example, OG_DATA_DIR="/data/pg2og"
 OG_DATA_DIR=""
 
 DIR=$(cd `dirname $0`;pwd)
